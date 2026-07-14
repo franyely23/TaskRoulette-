@@ -5,7 +5,12 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
-  }
+  },  {
+    path: 'pomodoro',
+    loadChildren: () => import('./pomodoro/pomodoro.module').then( m => m.PomodoroPageModule)
+  },
+
+  
 ];
 @NgModule({
   imports: [

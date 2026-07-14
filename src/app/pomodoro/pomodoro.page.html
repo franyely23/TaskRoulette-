@@ -1,0 +1,172 @@
+<ion-header>
+
+  <ion-toolbar>
+
+    <ion-title>
+      Pomodoro
+    </ion-title>
+
+  </ion-toolbar>
+
+</ion-header>
+
+
+
+<ion-content>
+
+
+<div class="container">
+
+
+
+  <h1>
+    🍅 Pomodoro
+  </h1>
+
+
+
+
+
+  <div class="task-box">
+
+
+    <h2>
+      Tarea actual:
+    </h2>
+
+
+    <p>
+      {{ tareaActual }}
+    </p>
+
+
+  </div>
+
+
+
+
+
+
+  <div class="timer">
+
+
+    {{ mostrarTiempo() }}
+
+
+  </div>
+
+
+
+
+
+
+  <!-- CONTROLES DEL CRONOMETRO -->
+
+  <div 
+  class="buttons"
+  *ngIf="!pomodoroTerminado">
+
+
+
+    <ion-button
+    expand="block"
+    (click)="iniciar()">
+
+      ▶ Iniciar
+
+    </ion-button>
+
+
+
+
+
+    <ion-button
+    expand="block"
+    color="warning"
+    (click)="pausar()">
+
+      ⏸ Pausar
+
+    </ion-button>
+
+
+
+
+
+    <ion-button
+    expand="block"
+    color="medium"
+    (click)="reiniciar()">
+
+      🔄 Reiniciar
+
+    </ion-button>
+
+
+
+  </div>
+
+
+
+
+
+
+
+  <!-- FINAL DEL POMODORO -->
+
+  <div
+  class="completed"
+  *ngIf="pomodoroTerminado">
+
+
+
+    <h2>
+      🎉 Pomodoro completado
+    </h2>
+
+
+
+    <p>
+      ¿Terminaste esta tarea?
+    </p>
+
+
+
+
+
+    <ion-button
+    expand="block"
+    (click)="completarTarea()">
+
+      ✅ Completar tarea
+
+    </ion-button>
+
+
+
+
+
+    <ion-button
+    expand="block"
+    color="medium"
+    (click)="mantenerTarea()">
+    
+    
+
+      🔄 Mantener tarea
+
+    </ion-button>
+
+
+
+
+  </div>
+
+
+
+
+
+</div>
+
+
+</ion-content>

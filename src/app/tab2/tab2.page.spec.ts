@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 import { StorageService } from 'src/app/services/storage.service';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
+import { FormsModule } from '@angular/forms';
 import { Tab2Page } from './tab2.page';
 
 describe('Tab2Page', () => {
@@ -19,7 +20,8 @@ describe('Tab2Page', () => {
       declarations: [Tab2Page],
       imports: [
         IonicModule.forRoot(),
-        ExploreContainerComponentModule
+        ExploreContainerComponentModule,
+        FormsModule
       ],
       providers: [
         { provide: StorageService, useValue: storageServiceMock }

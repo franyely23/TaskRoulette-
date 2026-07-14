@@ -29,11 +29,23 @@ p {
 
 /* RULETA */
 .ruleta {
+
   width: 100%;
   height: 100%;
+
   border-radius: 50%;
+
   position: relative;
+
+}
+
+
+/* SOLO CUANDO LA RULETA GIRA */
+
+.ruleta.girando {
+
   transition: transform 3s cubic-bezier(0.25, 1, 0.5, 1);
+
 }
 
 /* SEGMENTOS (texto) */
