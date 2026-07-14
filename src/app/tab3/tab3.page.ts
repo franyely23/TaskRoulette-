@@ -14,6 +14,9 @@ export class Tab3Page {
   angulo: number = 0;
   girando: boolean = false;
   tareaSeleccionada: string = '';
+  
+  // Variable para controlar que la animación solo ocurra al hacer clic
+  animacionActiva: boolean = false; 
 
   colores: string[] = [
     '#4f46e5',
@@ -35,6 +38,9 @@ export class Tab3Page {
   async ionViewWillEnter() {
     this.tareaSeleccionada = '';
     this.girando = false;
+    
+    // Apagamos la animación antes de que la ruleta vuelva a 0 grados
+    this.animacionActiva = false; 
     this.angulo = 0;
 
     const data = await this.storageService.get('tareas');
@@ -71,6 +77,9 @@ export class Tab3Page {
 
     this.girando = true;
     this.tareaSeleccionada = '';
+    
+    // Encendemos la animación justo en el momento de iniciar el giro
+    this.animacionActiva = true; 
 
     const vueltas = 5;
     const indice = Math.floor(Math.random() * this.tareas.length);
