@@ -7,16 +7,16 @@ import { StorageService } from '../services/storage.service';
   styleUrls: ['tab2.page.scss'],
   standalone: false,
 })
-export class Tab2Page implements OnInit {
+export class Tab2Page  {
 
   nuevaTarea: string = '';
   tareas: string[] = [];
 
   constructor(private storageService: StorageService) {}
 
-  async ngOnInit() {
-    await this.cargarTareas();
-  }
+  async ionViewWillEnter() {
+  await this.cargarTareas();
+}
 
   async cargarTareas() {
     const data = await this.storageService.get('tareas');
