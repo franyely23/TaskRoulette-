@@ -8,7 +8,11 @@ import { StorageService } from '../services/storage.service';
   styleUrls: ['tab2.page.scss'],
   standalone: false,
 })
+<<<<<<< HEAD
 export class Tab2Page {
+=======
+export class Tab2Page  {
+>>>>>>> e0d4ecc5f73b9036bc7fee7a7d484f9dbb1ee464
 
   nuevaTarea: string = '';
   tareas: string[] = [];
@@ -19,8 +23,13 @@ export class Tab2Page {
   ) {}
 
   async ionViewWillEnter() {
+<<<<<<< HEAD
     await this.cargarTareas();
   }
+=======
+  await this.cargarTareas();
+}
+>>>>>>> e0d4ecc5f73b9036bc7fee7a7d484f9dbb1ee464
 
   async cargarTareas() {
     const data = await this.storageService.get('tareas');
