@@ -12,10 +12,11 @@
     <div class="wheel-wrapper">
       <div class="pointer"></div>
       
-      <!-- La Ruleta que gira -->
+<!-- La Ruleta que gira -->
       <div class="wheel" 
            [style.background]="ruletaGradient"
-           [style.transform]="'rotate(-' + angulo + 'deg)'">
+           [style.transform]="'rotate(-' + angulo + 'deg)'"
+           [style.transition]="animacionActiva ? 'transform 3s cubic-bezier(0.17, 0.67, 0.12, 0.99)' : 'none'">
 
         <div class="wheel-segment" 
              *ngFor="let tarea of tareas; let i = index"
