@@ -1,172 +1,52 @@
-<ion-header>
+<ion-content [fullscreen]="true" class="dark-bg">
+  <div class="pomodoro-wrapper">
 
-  <ion-toolbar>
+    <div class="header-title">
+      <ion-icon name="time"></ion-icon>
+      <h2>TaskRoulette</h2>
+    </div>
 
-    <ion-title>
-      Pomodoro
-    </ion-title>
+    <div class="task-card">
+      <p>Tarea actual:</p>
+      <h3>{{ tareaActual || 'Ninguna tarea' }}</h3>
+    </div>
 
-  </ion-toolbar>
+    <div class="timer-ring" [class.completed]="pomodoroTerminado">
+      <span class="time-display">{{ mostrarTiempo() }}</span>
+    </div>
 
-</ion-header>
+    <div class="action-buttons" *ngIf="!pomodoroTerminado">
+      <ion-button class="neon-btn-gold" expand="block" (click)="iniciar()" [disabled]="corriendo">
+        <ion-icon name="play" slot="start"></ion-icon>
+        INICIAR
+      </ion-button>
+      
+      <!-- Se deshabilita si está pausado -->
+      <ion-button class="neon-btn-pink" expand="block" (click)="pausar()" [disabled]="!corriendo">
+        <ion-icon name="pause" slot="start"></ion-icon>
+        PAUSAR
+      </ion-button>
 
+      <ion-button class="neon-btn-gray" expand="block" (click)="reiniciar()">
+        <ion-icon name="refresh" slot="start"></ion-icon>
+        REINICIAR
+      </ion-button>
+    </div>
 
-
-<ion-content>
-
-
-<div class="container">
-
-
-
-  <h1>
-    🍅 Pomodoro
-  </h1>
-
-
-
-
-
-  <div class="task-box">
-
-
-    <h2>
-      Tarea actual:
-    </h2>
-
-
-    <p>
-      {{ tareaActual }}
-    </p>
-
-
-  </div>
-
-
-
-
-
-
-  <div class="timer">
-
-
-    {{ mostrarTiempo() }}
-
+    <div class="completion-card" *ngIf="pomodoroTerminado">
+      <h4>🎉 Pomodoro completado</h4>
+      <p>¿Terminaste esta tarea?</p>
+      
+      <ion-button class="neon-btn-green" expand="block" (click)="completarTarea()">
+        <ion-icon name="checkmark" slot="start"></ion-icon>
+        COMPLETAR TAREA
+      </ion-button>
+      
+      <ion-button class="neon-btn-gray" expand="block" (click)="mantenerTarea()">
+        <ion-icon name="sync" slot="start"></ion-icon>
+        MANTENER TAREA
+      </ion-button>
+    </div>
 
   </div>
-
-
-
-
-
-
-  <!-- CONTROLES DEL CRONOMETRO -->
-
-  <div 
-  class="buttons"
-  *ngIf="!pomodoroTerminado">
-
-
-
-    <ion-button
-    expand="block"
-    (click)="iniciar()">
-
-      ▶ Iniciar
-
-    </ion-button>
-
-
-
-
-
-    <ion-button
-    expand="block"
-    color="warning"
-    (click)="pausar()">
-
-      ⏸ Pausar
-
-    </ion-button>
-
-
-
-
-
-    <ion-button
-    expand="block"
-    color="medium"
-    (click)="reiniciar()">
-
-      🔄 Reiniciar
-
-    </ion-button>
-
-
-
-  </div>
-
-
-
-
-
-
-
-  <!-- FINAL DEL POMODORO -->
-
-  <div
-  class="completed"
-  *ngIf="pomodoroTerminado">
-
-
-
-    <h2>
-      🎉 Pomodoro completado
-    </h2>
-
-
-
-    <p>
-      ¿Terminaste esta tarea?
-    </p>
-
-
-
-
-
-    <ion-button
-    expand="block"
-    (click)="completarTarea()">
-
-      ✅ Completar tarea
-
-    </ion-button>
-
-
-
-
-
-    <ion-button
-    expand="block"
-    color="medium"
-    (click)="mantenerTarea()">
-    
-    
-
-      🔄 Mantener tarea
-
-    </ion-button>
-
-
-
-
-  </div>
-
-
-
-
-
-</div>
-
-
 </ion-content>

@@ -1,102 +1,117 @@
-/* CAMBIO DE FONDO DE LA PÁGINA */
-ion-content {
-  /* Un fondo azul marino oscuro profundo con un destello sutil morado abajo */
-  --background: linear-gradient(180deg, #111827 0%, #1e1b4b 100%);
+.dark-bg {
+  --background: #101020;
 }
 
-.container {
-  text-align: center;
-  padding: 20px;
-}
-
-h1 {
-  margin-bottom: 5px;
-  color: #ffffff; /* Aseguramos que el título sea blanco */
-}
-
-p {
-  color: #94a3b8; /* Un gris más claro para que se lea mejor sobre el nuevo fondo */
-  margin-bottom: 20px;
-}
-
-/* CONTENEDOR RULETA */
-.ruleta-wrapper {
-  position: relative;
-  width: 260px;
-  height: 260px;
-  margin: 20px auto;
-}
-
-/* RULETA */
-.ruleta {
-
-  width: 100%;
-  height: 100%;
-
-  border-radius: 50%;
-
-  position: relative;
-
-}
-
-
-/* SOLO CUANDO LA RULETA GIRA */
-
-.ruleta.girando {
-
-  transition: transform 3s cubic-bezier(0.25, 1, 0.5, 1);
-
-}
-
-/* SEGMENTOS (texto) */
-.segmento {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  transform-origin: center;
+.roulette-container {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  align-items: flex-start;
+  height: 100%;
+  padding: 30px;
 }
 
-.segmento span {
-  margin-top: 25px;
-  font-size: 0.75rem;
-  font-weight: bold;
-  color: white;
-  writing-mode: vertical-rl;
-  text-transform: uppercase;
-  max-height: 90px;
-  overflow: hidden;
+.roulette-header {
+  text-align: center;
+  margin-bottom: 50px;
+
+  h2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+    text-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+  }
+
+  p {
+    color: #a0a0b0;
+    font-size: 1rem;
+  }
 }
 
-/* PUNTERO */
-.puntero {
+.wheel-wrapper {
+  position: relative;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  border: 4px solid #2a2a40;
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.15), inset 0 0 40px rgba(0, 0, 0, 0.8);
+  background: #151525;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 60px;
+}
+
+.wheel {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  transition: transform 3s cubic-bezier(0.17, 0.67, 0.12, 0.99); 
+  position: relative;
+}
+
+.wheel-segment {
   position: absolute;
-  top: -15px;
+  top: 50%;
+  left: 50%;
+  width: 50%;
+  height: 20px;
+  margin-top: -10px;
+  transform-origin: 0% 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.segment-text {
+  color: white;
+  font-weight: bold;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.9);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 90px;
+  transform: rotate(90deg); 
+}
+
+.pointer {
+  position: absolute;
+  top: -20px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 2rem;
-  color: #ffffff; /* Cambiado a blanco para que resalte en el fondo oscuro */
+  width: 0; 
+  height: 0; 
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-top: 25px solid #FFD700; 
+  filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.8));
   z-index: 10;
 }
 
-/* RESULTADO */
-.resultado {
-  margin-top: 30px;
-}
-
-.resultado h2 {
-  color: #ffffff;
-}
-
-.box {
-  background: white;
-  padding: 20px;
-  border-radius: 15px;
+.neon-btn-gold {
+  --background: transparent;
+  --color: #FFD700;
+  --border-color: #FFD700;
+  --border-style: solid;
+  --border-width: 2px;
+  --box-shadow: 0 0 10px rgba(255, 215, 0, 0.4), inset 0 0 10px rgba(255, 215, 0, 0.2);
+  --border-radius: 20px;
+  width: 100%;
+  height: 55px;
   font-weight: bold;
-  font-size: 1.2rem;
-  color: #111; /* Mantiene las letras oscuras dentro del bloque blanco */
-  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  letter-spacing: 1px;
+}
+
+.spin-anim {
+  animation: girarIcono 1s linear infinite;
+}
+
+@keyframes girarIcono {
+  100% { transform: rotate(360deg); }
 }

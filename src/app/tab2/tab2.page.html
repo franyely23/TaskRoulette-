@@ -1,105 +1,37 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Mis Tareas</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" class="dark-bg">
+  <div class="tasks-container">
+    
+    <h1 class="header-title">Mis Tareas</h1>
 
-<ion-content>
-
-  <div class="container">
-
-    <!-- HEADER -->
-    <div class="header-section">
-
-      <ion-icon name="clipboard"></ion-icon>
-
-      <h1>Mis Tareas</h1>
-
-      <p>
-        Organiza tus actividades y deja que
-        la ruleta elija por ti.
-      </p>
-
-    </div>
-
-    <!-- INPUT -->
-    <ion-item class="task-input">
-      <ion-input
-        placeholder="Escribe una nueva tarea..."
+    <div class="input-container">
+      <ion-input 
+        class="glass-input" 
+        placeholder="Escribe una nueva tarea..." 
         [(ngModel)]="nuevaTarea">
       </ion-input>
-    </ion-item>
-
-    <ion-button
-      expand="block"
-      class="add-button"
-      (click)="agregarTarea()">
-
-      <ion-icon slot="start" name="add-circle"></ion-icon>
-      Agregar tarea
-
-    </ion-button>
-
-    <!-- EMPTY STATE -->
-    <div *ngIf="tareas.length === 0" class="empty-state">
-
-      <ion-icon name="sparkles"></ion-icon>
-
-      <p>
-        Aún no tienes tareas registradas.
-        Agrega la primera para comenzar.
-      </p>
-
     </div>
 
-    <!-- LISTA DE TAREAS -->
-    <ion-card
-      *ngFor="let tarea of tareas; let i = index"
-      class="task-card">
-
-      <ion-card-content>
-
-        <div class="task-row">
-
-          <div class="task-info">
-
-            <ion-icon name="checkmark-circle"></ion-icon>
-
-            <span>{{ tarea }}</span>
-
-          </div>
-
-          <ion-button
-            fill="clear"
-            color="danger"
-            (click)="eliminarTarea(i)">
-
-            <ion-icon slot="icon-only" name="trash"></ion-icon>
-
-          </ion-button>
-
-        </div>
-
-      </ion-card-content>
-
-    </ion-card>
-
-    <!-- BOTÓN RULETA -->
-    <ion-button
-      expand="block"
-      color="primary"
-      class="roulette-button"
-      [disabled]="tareas.length === 0"
-      routerLink="/tabs/tab3">
-
-      🎡 Ir a la ruleta
-
+    <ion-button class="neon-btn-cyan" expand="block" (click)="agregarTarea()">
+      <ion-icon name="add-circle" slot="start"></ion-icon>
+      AGREGAR TAREA
     </ion-button>
 
-    <ion-text color="medium" *ngIf="tareas.length === 0" class="hint-text">
-      Agrega al menos una tarea para activar la ruleta
-    </ion-text>
+    <ion-list class="task-list">
+
+      <ion-item class="task-item task-new" *ngFor="let tarea of tareas; let i = index">
+        <ion-icon name="checkmark-circle" slot="start" class="icon-check"></ion-icon>
+        
+        <ion-label>{{ tarea }}</ion-label>
+        
+        <ion-icon name="trash" slot="end" class="icon-delete" (click)="eliminarTarea(i)"></ion-icon>
+      </ion-item>
+
+    </ion-list>
+
+    <ion-button class="neon-btn-cyan" expand="block" style="margin-top: 20px;" (click)="irARuleta()">
+      <ion-icon name="aperture" slot="start"></ion-icon>
+      IR A LA RULETA
+    </ion-button>
 
   </div>
-
 </ion-content>

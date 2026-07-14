@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { StorageService } from '../services/storage.service';
 
 @Component({
@@ -7,14 +8,17 @@ import { StorageService } from '../services/storage.service';
   styleUrls: ['tab2.page.scss'],
   standalone: false,
 })
-export class Tab2Page implements OnInit {
+export class Tab2Page {
 
   nuevaTarea: string = '';
   tareas: string[] = [];
 
-  constructor(private storageService: StorageService) {}
+  constructor(
+    private storageService: StorageService,
+    private router: Router
+  ) {}
 
-  async ngOnInit() {
+  async ionViewWillEnter() {
     await this.cargarTareas();
   }
 
@@ -30,20 +34,20 @@ export class Tab2Page implements OnInit {
   }
 
   async agregarTarea() {
-
     if (!this.nuevaTarea.trim()) return;
 
     this.tareas.push(this.nuevaTarea);
-
     this.nuevaTarea = '';
-
+    
     await this.guardarTareas();
   }
 
   async eliminarTarea(index: number) {
-
     this.tareas.splice(index, 1);
-
     await this.guardarTareas();
+  }
+
+  irARuleta() {
+    this.router.navigate(['/tabs/tab3']);
   }
 }

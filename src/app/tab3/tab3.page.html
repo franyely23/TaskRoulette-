@@ -1,44 +1,41 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Ruleta</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" class="dark-bg">
+  <div class="roulette-container">
+    
+    <div class="roulette-header">
+      <h2>
+        <ion-icon name="aperture" style="color: #FFD700; margin-right: 8px;"></ion-icon>
+        Task Roulette
+      </h2>
+      <p>Gira la ruleta y deja que el destino elija</p>
+    </div>
 
-<ion-content>
-  <div class="container">
-    <h1>🎡 Task Roulette</h1>
-    <p>Gira la ruleta y deja que el destino elija</p>
+    <div class="wheel-wrapper">
+      <div class="pointer"></div>
+      
+      <!-- La Ruleta que gira -->
+      <div class="wheel" 
+           [style.background]="ruletaGradient"
+           [style.transform]="'rotate(-' + angulo + 'deg)'">
 
-    <div class="ruleta-wrapper">
-      <div
-        class="ruleta"
-        [style.transform]="'rotate(-' + angulo + 'deg)'" 
-        [style.background]="ruletaGradient"
-        [class.girando]="girando">
-
-        <div
-          class="segmento"
-          *ngFor="let tarea of tareas; let i = index"
-          [style.transform]="'rotate(' + (i * (360 / tareas.length) + (360 / tareas.length / 2)) + 'deg)'">
-          <span>{{ tarea }}</span>
+        <div class="wheel-segment" 
+             *ngFor="let tarea of tareas; let i = index"
+             [style.transform]="'rotate(' + ((i * (360 / tareas.length)) + (180 / tareas.length) - 90) + 'deg)'">
+          <span class="segment-text">{{ tarea }}</span>
         </div>
 
       </div>
-      <div class="puntero">▼</div>
     </div>
 
-    <ion-button
-      expand="block"
-      (click)="girarRuleta()"
+    <ion-button 
+      class="neon-btn-gold" 
+      expand="block" 
+      (click)="girarRuleta()" 
       [disabled]="girando || tareas.length === 0">
-      🎡 Girar ruleta
+
+      <ion-icon [name]="girando ? 'sync' : 'aperture'" slot="start" [class.spin-anim]="girando"></ion-icon>
+      {{ girando ? 'GIRANDO...' : 'GIRAR RULETA' }}
+      
     </ion-button>
 
-    <div class="resultado" *ngIf="tareaSeleccionada">
-      <h2>✨ Tarea elegida:</h2>
-      <div class="box">
-        {{ tareaSeleccionada }}
-      </div>
-    </div>
   </div>
 </ion-content>

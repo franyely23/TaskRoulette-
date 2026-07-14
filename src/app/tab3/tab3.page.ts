@@ -3,7 +3,6 @@ import { StorageService } from '../services/storage.service';
 import { P2pService } from '../services/p2p';
 import { Router } from '@angular/router';
 
-
 @Component({
   selector: 'app-tab3',
   templateUrl: 'tab3.page.html',
@@ -11,14 +10,11 @@ import { Router } from '@angular/router';
   standalone: false,
 })
 export class Tab3Page {
-
-
   tareas: string[] = [];
   angulo: number = 0;
   girando: boolean = false;
   tareaSeleccionada: string = '';
 
-  
   colores: string[] = [
     '#4f46e5',
     '#22c55e',
@@ -30,26 +26,16 @@ export class Tab3Page {
 
   ruletaGradient: string = '';
 
-
-
   constructor(
     private storageService: StorageService,
     public p2pService: P2pService,
     private router: Router
   ) {}
 
-
-
-
   async ionViewWillEnter() {
-
     this.tareaSeleccionada = '';
-
-    // Reiniciar estado visual de la ruleta
     this.girando = false;
-
     this.angulo = 0;
-
 
     const data = await this.storageService.get('tareas');
 
@@ -60,152 +46,50 @@ export class Tab3Page {
       this.tareas = [];
       this.ruletaGradient = '';
     }
-
-
-}
-
-
-
-
+  }
 
   generarRuleta() {
-
     if (this.tareas.length === 0) return;
-
 
     const totalSegs = this.tareas.length;
-
     const gradoPorSegmento = 360 / totalSegs;
-
-
     let partesGradient: string[] = [];
 
-
-
     for (let i = 0; i < totalSegs; i++) {
-
-
       const color = this.colores[i % this.colores.length];
-
-
       const inicio = i * gradoPorSegmento;
-
       const fin = (i + 1) * gradoPorSegmento;
 
-
-
-      partesGradient.push(
-        `${color} ${inicio}deg ${fin}deg`
-      );
-
+      partesGradient.push(`${color} ${inicio}deg ${fin}deg`);
     }
 
-
-
-    this.ruletaGradient = 
-      `conic-gradient(${partesGradient.join(', ')})`;
-
+    this.ruletaGradient = `conic-gradient(${partesGradient.join(', ')})`;
   }
-
-
-
-
-
-
 
   girarRuleta() {
-
-
     if (this.tareas.length === 0) return;
 
-
-
     this.girando = true;
-
     this.tareaSeleccionada = '';
 
-
-
     const vueltas = 5;
+    const indice = Math.floor(Math.random() * this.tareas.length);
+    const tamañoSegmento = 360 / this.tareas.length;
+    const centroSegmento = tamañoSegmento / 2;
 
-
-    const indice = Math.floor(
-      Math.random() * this.tareas.length
-    );
-
-
-
-    const tamañoSegmento = 
-      360 / this.tareas.length;
-
-
-
-    const centroSegmento =
-      tamañoSegmento / 2;
-
-
-
-    this.angulo =
-      (vueltas * 360) +
-      (indice * tamañoSegmento) +
-      centroSegmento;
-
-
-
-
-
-
+    this.angulo = (vueltas * 360) + (indice * tamañoSegmento) + centroSegmento;
 
     setTimeout(async () => {
-
-
-
       this.girando = false;
+      this.tareaSeleccionada = this.tareas[indice];
 
-
-
-      this.tareaSeleccionada =
-        this.tareas[indice];
-
-
-
-
-      // Guardamos tarea seleccionada
-
-      await this.storageService.set(
-        'tarea_pendiente',
-        this.tareaSeleccionada
-      );
-
-
-
-
-
-      // Enviamos por P2P si existe conexión
+      await this.storageService.set('tarea_pendiente', this.tareaSeleccionada);
 
       if (this.p2pService.conectadoA) {
-
         await this.p2pService.transferirTareasPendientes();
-
       }
 
-
-
-
-
-      // NUEVO:
-      // Abrimos automáticamente Pomodoro
-
-      this.router.navigate([
-        '/pomodoro'
-      ]);
-
-
-
-
+      this.router.navigate(['/pomodoro']);
     }, 3000);
-
   }
-
-
 }

@@ -1,25 +1,18 @@
-<ion-content class="welcome-content">
+<ion-content [fullscreen]="true" class="dark-bg">
+  <div class="intro-container">
 
-  <div class="welcome-container">
-
-    <div class="logo-circle">
-      <ion-icon name="shuffle"></ion-icon>
+    <div class="logo-ring">
+      <ion-icon name="shuffle-outline"></ion-icon>
     </div>
 
-    <h1>TaskRoulette</h1>
-
-    <p class="subtitle">
+    <h1 class="title-text">TaskRoulette</h1>
+    <p class="subtitle-text">
       Convierte tu lista de tareas en una experiencia más dinámica y mantén tu enfoque en lo que realmente importa.
     </p>
 
-   <ion-button
-  expand="block"
-  size="large"
-  class="start-button"
-  (click)="empezar()">
-  Empecemos
+<ion-button class="neon-btn" shape="round" expand="block" (click)="empezar()">
+  EMPECEMOS
 </ion-button>
-
+    
   </div>
-
 </ion-content>
