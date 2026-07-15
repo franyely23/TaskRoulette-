@@ -63,21 +63,27 @@
   transform-origin: 0% 50%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  /* CAMBIO AQUÍ: flex-end empuja el texto hacia el borde exterior de la ruleta */
+  justify-content: flex-end; 
+  /* CAMBIO AQUÍ: un pequeño padding para que no toque exactamente el borde */
+  padding-right: 15px; 
 }
 
 .segment-text {
   color: white;
   font-weight: bold;
-  font-size: 0.9rem;
+  /* Bajar un poco el tamaño ayuda cuando hay muchas tareas */
+  font-size: 0.85rem; 
   text-transform: uppercase;
   text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.9);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 90px;
-  transform: rotate(90deg); 
+  max-width: 95px;
+  /* ELIMINADO: transform: rotate(90deg); */
 }
+
+
 
 .pointer {
   position: absolute;

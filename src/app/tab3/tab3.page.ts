@@ -18,14 +18,7 @@ export class Tab3Page {
   // Variable para controlar que la animación solo ocurra al hacer clic
   animacionActiva: boolean = false; 
 
-  colores: string[] = [
-    '#4f46e5',
-    '#22c55e',
-    '#f59e0b',
-    '#ef4444',
-    '#3b82f6',
-    '#a855f7'
-  ];
+  
 
   ruletaGradient: string = '';
 
@@ -67,7 +60,12 @@ export class Tab3Page {
     let partesGradient: string[] = [];
 
     for (let i = 0; i < totalSegs; i++) {
-      const color = this.colores[i % this.colores.length];
+      // Calculamos un tono (hue) único para cada segmento en el círculo cromático de 360 grados
+      const hue = Math.floor((360 / totalSegs) * i);
+      
+      // HSL: hue (color dinámico), saturación 80% (vivo), luminosidad 55% (brillante para tu fondo oscuro)
+      const color = `hsl(${hue}, 80%, 55%)`; 
+
       const inicio = i * gradoPorSegmento;
       const fin = (i + 1) * gradoPorSegmento;
 
