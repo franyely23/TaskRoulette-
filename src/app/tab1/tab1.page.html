@@ -1,188 +1,73 @@
 <ion-header class="ion-no-border">
   <ion-toolbar style="--background: #151525; color: white;">
-    <ion-title>
-      Perfil de Usuario
-    </ion-title>
+    <ion-title>Perfil de Usuario</ion-title>
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content [fullscreen]="true" class="dark-bg">
-
   <div class="login-container">
-
+    
     <div class="login-header">
-
       <h2>
-        <ion-icon
-          name="person-circle"
-          style="color: #FFD700; margin-right: 8px;">
-        </ion-icon>
-
+        <ion-icon name="person-circle" style="color: #FFD700; margin-right: 8px;"></ion-icon>
         Tu Perfil
       </h2>
-
-      <p>
-        Identifícate antes de jugar con el destino
-      </p>
-
+      <p>Identifícate antes de jugar con el destino</p>
     </div>
-
-
-    <!-- FOTO -->
 
     <div class="avatar-wrapper" (click)="tomarFoto()">
-
-      <img
-        *ngIf="fotoPerfil"
-        [src]="fotoPerfil"
-        class="avatar-img">
-
-      <div
-        *ngIf="!fotoPerfil"
-        class="avatar-placeholder">
-
-        <ion-icon
-          name="camera"
-          style="font-size: 3rem; color: #a0a0b0;">
-        </ion-icon>
-
+      <img *ngIf="fotoPerfil" [src]="fotoPerfil" class="avatar-img">
+      <div *ngIf="!fotoPerfil" class="avatar-placeholder">
+        <ion-icon name="camera" style="font-size: 3rem; color: #a0a0b0;"></ion-icon>
       </div>
-
     </div>
-
-
-    <p class="photo-hint">
-      Toca el círculo para tomarte una foto
-    </p>
-
-
-    <!-- INPUT -->
+    <p class="photo-hint">Toca el círculo para tomarte una foto</p>
 
     <div class="input-container">
-
-      <ion-item
-        class="neon-input"
-        lines="none">
-
-        <ion-icon
-          name="person-outline"
-          slot="start"
-          color="light">
-        </ion-icon>
-
-        <ion-input
-          [(ngModel)]="nombreUsuario"
-          placeholder="Nombre de usuario"
+      <ion-item class="neon-input" lines="none">
+        <ion-icon name="person-outline" slot="start" color="light"></ion-icon>
+        <ion-input 
+          [(ngModel)]="nombreUsuario" 
+          placeholder="Nombre de usuario" 
           type="text">
         </ion-input>
-
       </ion-item>
-
     </div>
 
-
-    <!-- BOTÓN GUARDAR -->
-
-    <ion-button
-      class="neon-btn-gold"
-      expand="block"
-      (click)="guardarPerfil()">
-
-      <ion-icon
-        name="save"
-        slot="start">
-      </ion-icon>
-
+    <ion-button class="neon-btn-gold" expand="block" (click)="guardarPerfil()">
+      <ion-icon name="save" slot="start"></ion-icon>
       GUARDAR PERFIL
-
     </ion-button>
-
 
     <div class="divider"></div>
 
-
-    <p class="photo-hint">
-      (Requisito: Geolocalización)
-    </p>
-
-
-    <!-- BOTÓN MAPA -->
-
-    <ion-button
-      class="neon-btn-gold"
-      expand="block"
-      fill="outline"
-      (click)="obtenerUbicacion()">
-
-      <ion-icon
-        name="map"
-        slot="start">
-      </ion-icon>
-
+    <ion-button class="neon-btn-gold" expand="block" (click)="obtenerUbicacion()">
+      <ion-icon name="map" slot="start"></ion-icon>
       VER MI UBICACIÓN
-
     </ion-button>
 
-
   </div>
-
 </ion-content>
 
-
-
-<!-- ===================================== -->
-<!-- MODAL DEL MAPA -->
-<!-- ===================================== -->
-
-<ion-modal
-  [isOpen]="isModalOpen"
-  (didDismiss)="cerrarMapa()">
-
+<ion-modal [isOpen]="isModalOpen" (didDismiss)="cerrarMapa()">
   <ng-template>
-
     <ion-header>
-
       <ion-toolbar color="dark">
-
-        <ion-title>
-          Mi ubicación
-        </ion-title>
-
-
+        <ion-title>Mi ubicación</ion-title>
         <ion-buttons slot="end">
-
-          <ion-button
-            class="btn-cerrar-mapa"
-            fill="solid"
-            (click)="cerrarMapa()">
-
-            Cerrar
-
-          </ion-button>
-
+          <ion-button fill="solid" color="primary" (click)="cerrarMapa()">Cerrar</ion-button>
         </ion-buttons>
-
-
       </ion-toolbar>
-
     </ion-header>
-
-
     <ion-content>
-
-      <iframe
-        *ngIf="mapUrl"
-        [src]="mapUrl"
-        width="100%"
-        height="100%"
-        frameborder="0"
+      <iframe 
+        *ngIf="mapUrl" 
+        [src]="mapUrl" 
+        width="100%" 
+        height="100%" 
+        frameborder="0" 
         style="border: 0;">
       </iframe>
-
     </ion-content>
-
-
   </ng-template>
-
 </ion-modal>

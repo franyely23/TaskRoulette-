@@ -4,6 +4,8 @@ import { Geolocation } from '@capacitor/geolocation';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { StorageService } from '../services/storage.service';
 import { ToastController } from '@ionic/angular';
+import { AudioService } from '../services/audio.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab1',
@@ -16,7 +18,6 @@ export class Tab1Page {
   nombreUsuario: string = '';
   fotoPerfil: string | undefined = '';
 
-  // Variables para la ubicación y el mapa
   miUbicacion: string = '';
   mapUrl: SafeResourceUrl | null = null;
   isModalOpen: boolean = false;
@@ -24,7 +25,9 @@ export class Tab1Page {
   constructor(
     private storageService: StorageService,
     private toastController: ToastController,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private audioService: AudioService,
+    private router: Router
   ) {}
 
   async ionViewWillEnter() {
@@ -49,14 +52,16 @@ export class Tab1Page {
         source: CameraSource.Camera
       });
 
+      this.audioService.reproducir('camara');
       this.fotoPerfil = image.dataUrl;
 
     } catch (error) {
-      console.error('Error al abrir la cámara', error);
+      console.error(error);
     }
   }
 
   async guardarPerfil() {
+    this.audioService.reproducir('click');
 
     if (!this.nombreUsuario || !this.nombreUsuario.trim()) {
       this.mostrarToast('Por favor ingresa un nombre de usuario', 'warning');
@@ -79,29 +84,27 @@ export class Tab1Page {
       '¡Perfil guardado con éxito!',
       'success'
     );
+
+    setTimeout(() => {
+      this.router.navigate(['/tabs/tab2']);
+    }, 500);
   }
 
-  //=========================
-  // GEOLOCALIZACIÓN
-  //=========================
-
   async obtenerUbicacion() {
+    this.audioService.reproducir('click');
 
     try {
-
       this.mostrarToast(
         'Obteniendo ubicación...',
         'tertiary'
       );
 
-      const coordinates =
-        await Geolocation.getCurrentPosition();
+      const coordinates = await Geolocation.getCurrentPosition();
 
       const lat = coordinates.coords.latitude;
       const lng = coordinates.coords.longitude;
 
-      this.miUbicacion =
-        `Lat: ${lat.toFixed(4)}, Lng: ${lng.toFixed(4)}`;
+      this.miUbicacion = `Lat: ${lat.toFixed(4)}, Lng: ${lng.toFixed(4)}`;
 
       const delta = 0.005;
 
@@ -110,48 +113,34 @@ export class Tab1Page {
       const maxLng = lng + delta;
       const maxLat = lat + delta;
 
-      const rawUrl =
-        `https://www.openstreetmap.org/export/embed.html?bbox=${minLng}%2C${minLat}%2C${maxLng}%2C${maxLat}&layer=mapnik&marker=${lat}%2C${lng}`;
+      const rawUrl = `https://www.openstreetmap.org/export/embed.html?bbox=${minLng}%2C${minLat}%2C${maxLng}%2C${maxLat}&layer=mapnik&marker=${lat}%2C${lng}`;
 
-      this.mapUrl =
-        this.sanitizer.bypassSecurityTrustResourceUrl(rawUrl);
+      this.mapUrl = this.sanitizer.bypassSecurityTrustResourceUrl(rawUrl);
 
       this.isModalOpen = true;
 
     } catch (error) {
-
       console.error(error);
-
       this.mostrarToast(
         'No se pudo acceder al GPS.',
         'danger'
       );
-
     }
-
   }
 
   cerrarMapa() {
+    this.audioService.reproducir('click');
     this.isModalOpen = false;
   }
 
-  async mostrarToast(
-    mensaje: string,
-    color: string
-  ) {
-
-    const toast =
-      await this.toastController.create({
-
-        message: mensaje,
-        duration: 2000,
-        color: color,
-        position: 'bottom'
-
-      });
+  async mostrarToast(mensaje: string, color: string) {
+    const toast = await this.toastController.create({
+      message: mensaje,
+      duration: 2000,
+      color: color,
+      position: 'bottom'
+    });
 
     await toast.present();
-
   }
-
 }
