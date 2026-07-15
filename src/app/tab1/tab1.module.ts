@@ -1,21 +1,17 @@
-import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { IonicModule } from '@ionic/angular'; // <- ESTO ES LO QUE QUITA EL ERROR DEL ION-ICON
+import { FormsModule } from '@angular/forms'; // <- ESTO EVITA OTRO ERROR CON EL NGMODEL
 import { Tab1Page } from './tab1.page';
-import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
-
 import { Tab1PageRoutingModule } from './tab1-routing.module';
 
 @NgModule({
   imports: [
-    IonicModule,
     CommonModule,
     FormsModule,
-    ExploreContainerComponentModule,
-    Tab1PageRoutingModule,
-    Tab1Page // <-- ¡Perfecto! Al ser Standalone, se importa aquí en lugar de declararse
+    IonicModule, // <- DEBE ESTAR AQUÍ ADENTRO
+    Tab1PageRoutingModule
   ],
-  declarations: [] // <-- Dejamos esto vacío para que no tire el error NG6008
+  declarations: [Tab1Page]
 })
 export class Tab1PageModule {}

@@ -1,18 +1,45 @@
 <ion-content [fullscreen]="true" class="dark-bg">
-  <div class="intro-container">
-
-    <div class="logo-ring">
-      <ion-icon name="shuffle-outline"></ion-icon>
+  <div class="login-container">
+    
+    <div class="login-header">
+      <h2>
+        <ion-icon name="person-circle" style="color: #FFD700; margin-right: 8px;"></ion-icon>
+        Tu Perfil
+      </h2>
+      <p>Identifícate antes de jugar con el destino</p>
     </div>
 
-    <h1 class="title-text">TaskRoulette</h1>
-    <p class="subtitle-text">
-      Convierte tu lista de tareas en una experiencia más dinámica y mantén tu enfoque en lo que realmente importa.
-    </p>
+    <!-- Círculo de la foto de perfil -->
+    <div class="avatar-wrapper" (click)="tomarFoto()">
+      <!-- Si hay foto, la muestra -->
+      <img *ngIf="fotoPerfil" [src]="fotoPerfil" class="avatar-img" />
+      
+      <!-- Si no hay foto, muestra un icono por defecto -->
+      <div *ngIf="!fotoPerfil" class="avatar-placeholder">
+        <ion-icon name="camera"></ion-icon>
+      </div>
+    </div>
+    <p class="photo-hint">Toca el círculo para tomarte una foto</p>
 
-<ion-button class="neon-btn" shape="round" expand="block" (click)="empezar()">
-  EMPECEMOS
-</ion-button>
-    
+    <!-- Input para el "Login" -->
+    <div class="input-container">
+      <ion-item class="neon-input" lines="none">
+        <ion-icon name="person-outline" slot="start" color="light"></ion-icon>
+        <ion-input 
+          [(ngModel)]="nombreUsuario" 
+          placeholder="Nombre de usuario" 
+          type="text">
+        </ion-input>
+      </ion-item>
+    </div>
+
+    <ion-button 
+      class="neon-btn-gold" 
+      expand="block" 
+      (click)="guardarPerfil()">
+      <ion-icon name="save" slot="start"></ion-icon>
+      GUARDAR PERFIL
+    </ion-button>
+
   </div>
 </ion-content>
