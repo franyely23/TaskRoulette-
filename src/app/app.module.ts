@@ -2,12 +2,14 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
+import { HttpClientModule } from '@angular/common/http'; 
+
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { IonicStorageModule } from '@ionic/storage-angular';
-import { Storage } from '@ionic/storage-angular'; // <-- Añadimos esta importación específica
+import { Storage } from '@ionic/storage-angular';
 
 @NgModule({
   declarations: [],
@@ -16,11 +18,12 @@ import { Storage } from '@ionic/storage-angular'; // <-- Añadimos esta importac
     IonicModule.forRoot(), 
     AppRoutingModule,
     AppComponent,
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    HttpClientModule 
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    Storage // <-- Registramos explícitamente el proveedor de Storage aquí
+    Storage
   ],
   bootstrap: [AppComponent],
 })

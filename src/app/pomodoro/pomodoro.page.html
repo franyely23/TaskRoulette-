@@ -1,10 +1,18 @@
 <ion-content [fullscreen]="true" class="dark-bg">
-  <div class="pomodoro-wrapper">
+  
+  <div class="arcade-grid"></div>
+
+  <div class="pomodoro-wrapper" style="position: relative; z-index: 1;">
 
     <div class="header-title">
       <ion-icon name="time"></ion-icon>
       <h2>TaskRoulette</h2>
     </div>
+    
+    <div class="motivation-card">
+  <p class="quote">"{{ fraseDelDia }}"</p>
+  <span class="author" *ngIf="autorDelDia">- {{ autorDelDia }}</span>
+</div>
 
     <div class="task-card">
       <p>Tarea actual:</p>
@@ -21,7 +29,6 @@
         INICIAR
       </ion-button>
       
-      <!-- Se deshabilita si está pausado -->
       <ion-button class="neon-btn-pink" expand="block" (click)="pausar()" [disabled]="!corriendo">
         <ion-icon name="pause" slot="start"></ion-icon>
         PAUSAR
@@ -34,7 +41,7 @@
     </div>
 
     <div class="completion-card" *ngIf="pomodoroTerminado">
-      <h4>🎉 Pomodoro completado</h4>
+      <h4>🎉 Tiempo completado</h4>
       <p>¿Terminaste esta tarea?</p>
       
       <ion-button class="neon-btn-green" expand="block" (click)="completarTarea()">

@@ -1,166 +1,155 @@
-.dark-bg {
-  --background: #101020;
+/* --- Fondo insertado directamente en el Shadow DOM de Ionic (INFALIBLE) --- */
+ion-content.dark-bg::part(background) {
+  background-color: #101020;
+  background-image:
+    linear-gradient(rgba(0, 255, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 35px 35px;
+  background-position: center center;
 }
 
 .pomodoro-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 30px 20px;
+  justify-content: center;
   height: 100%;
+  padding: 30px;
 }
 
 .header-title {
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: center;
   color: white;
-  margin-bottom: 30px;
-
-  h2 {
-    margin: 0;
-    font-weight: bold;
-    font-size: 1.8rem;
-  }
+  font-weight: 900;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  text-shadow: 0 0 15px rgba(255, 0, 85, 0.5);
   
-  ion-icon {
-    font-size: 2rem;
-    color: #ff3366; 
-    filter: drop-shadow(0 0 8px rgba(255, 51, 102, 0.6));
-  }
+  ion-icon { color: #ff0055; margin-right: 10px; }
 }
 
 .task-card {
-  width: 100%;
-  background: rgba(32, 32, 60, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
-  padding: 20px;
   text-align: center;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-  margin-bottom: 40px;
-  
-  p { 
-    margin: 0 0 5px 0; 
-    color: #a0a0b0; 
-    font-size: 0.9rem; 
-  }
-  
-  h3 { 
-    margin: 0; 
-    color: white; 
-    font-size: 1.5rem; 
-    font-weight: bold; 
+  margin-bottom: 30px;
+  p { color: #a0a0b0; margin: 0 0 5px 0; }
+  h3 {
+    color: #00f0ff;
+    margin: 0;
+    font-size: 1.5rem;
+    text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+    font-weight: bold;
   }
 }
 
 .timer-ring {
-  width: 220px;
-  height: 220px;
+  width: 240px;
+  height: 240px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(0,255,255,0.05) 0%, rgba(0,0,0,0.6) 100%);
-  border: 6px solid #00FFFF;
-  box-shadow: 0 0 25px rgba(0, 255, 255, 0.4), inset 0 0 25px rgba(0, 255, 255, 0.2);
+  border: 4px solid #00f0ff !important;
+  box-shadow: 0 0 30px rgba(0, 240, 255, 0.4), inset 0 0 20px rgba(0, 240, 255, 0.2) !important;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 40px;
+  background: #151525;
   transition: all 0.3s ease;
 
-  .time-display {
-    font-size: 4.5rem;
-    font-weight: bold;
-    color: white;
-    text-shadow: 0 0 15px #00FFFF;
-  }
-
   &.completed {
-    border-color: #444;
-    box-shadow: none;
-    background: rgba(0,0,0,0.4);
-    
-    .time-display { 
-      color: #666; 
-      text-shadow: none; 
-    }
+    border-color: #00ff88 !important; 
+    box-shadow: 0 0 30px rgba(0, 255, 136, 0.4), inset 0 0 20px rgba(0, 255, 136, 0.2) !important;
+    .time-display { color: #00ff88; text-shadow: 0 0 15px rgba(0, 255, 136, 0.5); }
   }
 }
 
-.action-buttons {
+.time-display {
+  font-size: 4.5rem;
+  font-weight: bold;
+  color: white;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+.action-buttons, .completion-card {
   width: 100%;
+  max-width: 320px;
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
-.neon-btn-gold {
+.completion-card h4 {
+  color: #00ff88;
+  font-size: 1.5rem;
+  margin-bottom: 5px;
+  text-shadow: 0 0 10px rgba(0, 255, 136, 0.4);
+  text-align: center;
+}
+
+.completion-card p {
+  color: white;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+ion-button {
   --background: transparent;
-  --color: #FFD700;
-  --border-color: #FFD700;
   --border-style: solid;
   --border-width: 2px;
-  --box-shadow: 0 0 10px rgba(255, 215, 0, 0.4), inset 0 0 10px rgba(255, 215, 0, 0.2);
   --border-radius: 20px;
-  height: 50px;
+  height: 55px;
   font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.neon-btn-gold {
+  --color: #FFD700;
+  --border-color: #FFD700;
+  --box-shadow: 0 0 15px rgba(255, 215, 0, 0.4), inset 0 0 10px rgba(255, 215, 0, 0.2);
 }
 
 .neon-btn-pink {
-  --background: transparent;
-  --color: #FF99CC;
-  --border-color: #FF99CC;
-  --border-style: solid;
-  --border-width: 2px;
-  --box-shadow: 0 0 10px rgba(255, 153, 204, 0.4), inset 0 0 10px rgba(255, 153, 204, 0.2);
-  --border-radius: 20px;
-  height: 50px;
-  font-weight: bold;
-}
-
-.neon-btn-green {
-  --background: transparent;
-  --color: #39ff14;
-  --border-color: #39ff14;
-  --border-style: solid;
-  --border-width: 2px;
-  --box-shadow: 0 0 10px rgba(57, 255, 20, 0.4), inset 0 0 10px rgba(57, 255, 20, 0.2);
-  --border-radius: 20px;
-  height: 50px;
-  font-weight: bold;
+  --color: #ff0055;
+  --border-color: #ff0055;
+  --box-shadow: 0 0 15px rgba(255, 0, 85, 0.4), inset 0 0 10px rgba(255, 0, 85, 0.2);
 }
 
 .neon-btn-gray {
-  --background: transparent;
-  --color: #aaaaaa;
-  --border-color: #aaaaaa;
-  --border-style: solid;
-  --border-width: 2px;
-  --box-shadow: 0 0 10px rgba(170, 170, 170, 0.2), inset 0 0 10px rgba(170, 170, 170, 0.1);
-  --border-radius: 20px;
-  height: 50px;
-  font-weight: bold;
+  --color: #a0a0b0;
+  --border-color: #a0a0b0;
+  --box-shadow: 0 0 15px rgba(160, 160, 176, 0.4), inset 0 0 10px rgba(160, 160, 176, 0.2);
 }
 
-.completion-card {
-  width: 100%;
-  background: rgba(40, 40, 60, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 16px;
-  padding: 25px 20px;
+.neon-btn-green {
+  --color: #00ff88;
+  --border-color: #00ff88;
+  --box-shadow: 0 0 15px rgba(0, 255, 136, 0.4), inset 0 0 10px rgba(0, 255, 136, 0.2);
+}
+
+.motivation-card {
+  width: 90%;
+  max-width: 320px;
+  background: rgba(30, 30, 50, 0.6);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 25px;
   text-align: center;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(10px);
-  
-  h4 { 
-    margin: 0 0 10px 0; 
-    color: white; 
-    font-size: 1.3rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+
+  .quote {
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-style: italic;
+    margin: 0 0 10px 0;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
   }
-  
-  p { 
-    margin: 0 0 20px 0; 
-    color: #ccc; 
-    font-size: 1rem; 
+
+  .author {
+    color: #00f0ff;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
   }
 }

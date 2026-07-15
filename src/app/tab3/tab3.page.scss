@@ -1,5 +1,18 @@
 .dark-bg {
-  --background: #101020;
+  --background: #101020; 
+  position: relative;
+}
+
+.arcade-grid {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image:
+    linear-gradient(rgba(0, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 35px 35px;
+  background-position: center center;
+  z-index: 0;
+  pointer-events: none;
 }
 
 .roulette-container {
@@ -34,16 +47,53 @@
 
 .wheel-wrapper {
   position: relative;
-  width: 280px;
-  height: 280px;
-  border-radius: 50%;
-  border: 4px solid #2a2a40;
-  box-shadow: 0 0 30px rgba(0, 255, 255, 0.15), inset 0 0 40px rgba(0, 0, 0, 0.8);
-  background: #151525;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 60px;
+}
+
+.pointer-container {
+  position: absolute;
+  top: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pointer {
+  width: 0;
+  height: 0;
+  border-left: 18px solid transparent;
+  border-right: 18px solid transparent;
+  border-top: 28px solid #FFD700;
+  filter: drop-shadow(0 6px 4px rgba(0,0,0,0.6));
+}
+
+.pointer-glow {
+  position: absolute;
+  top: 0;
+  width: 25px;
+  height: 25px;
+  background: #FFD700;
+  border-radius: 50%;
+  filter: blur(12px);
+}
+
+.ruleta-outer-ring {
+  width: 300px; 
+  height: 300px;
+  border-radius: 50%;
+  padding: 8px;
+  background: linear-gradient(135deg, #00f0ff, #ff0055, #ffd700);
+  box-shadow:
+    0 0 25px rgba(0, 240, 255, 0.4),
+    0 0 50px rgba(255, 0, 85, 0.3),
+    inset 0 0 20px rgba(0,0,0,0.8);
+  position: relative;
 }
 
 .wheel {
@@ -51,6 +101,24 @@
   height: 100%;
   border-radius: 50%;
   position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 0 40px rgba(0,0,0,0.7);
+}
+
+.ruleta-center-pivot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 45px;
+  height: 45px;
+  background: #101020;
+  border: 3px solid #00f0ff;
+  border-radius: 50%;
+  box-shadow:
+    0 0 15px #00f0ff,
+    inset 0 0 10px #000;
+  z-index: 5;
 }
 
 .wheel-segment {
@@ -63,16 +131,13 @@
   transform-origin: 0% 50%;
   display: flex;
   align-items: center;
-  /* CAMBIO AQUÍ: flex-end empuja el texto hacia el borde exterior de la ruleta */
   justify-content: flex-end; 
-  /* CAMBIO AQUÍ: un pequeño padding para que no toque exactamente el borde */
   padding-right: 15px; 
 }
 
 .segment-text {
   color: white;
   font-weight: bold;
-  /* Bajar un poco el tamaño ayuda cuando hay muchas tareas */
   font-size: 0.85rem; 
   text-transform: uppercase;
   text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.9);
@@ -80,23 +145,6 @@
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 95px;
-  /* ELIMINADO: transform: rotate(90deg); */
-}
-
-
-
-.pointer {
-  position: absolute;
-  top: -20px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0; 
-  height: 0; 
-  border-left: 15px solid transparent;
-  border-right: 15px solid transparent;
-  border-top: 25px solid #FFD700; 
-  filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.8));
-  z-index: 10;
 }
 
 .neon-btn-gold {
@@ -111,6 +159,10 @@
   height: 55px;
   font-weight: bold;
   letter-spacing: 1px;
+}
+
+.btn-arcade {
+  margin-top: 10px;
 }
 
 .spin-anim {

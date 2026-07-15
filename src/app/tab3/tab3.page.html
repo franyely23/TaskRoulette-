@@ -1,34 +1,45 @@
 <ion-content [fullscreen]="true" class="dark-bg">
-  <div class="roulette-container">
+  <div class="arcade-grid"></div>
+
+  <div class="roulette-container" style="position: relative; z-index: 1;">
     
     <div class="roulette-header">
       <h2>
-        <ion-icon name="aperture" style="color: #FFD700; margin-right: 8px;"></ion-icon>
+        <ion-icon name="aperture" style="color: #FFD700; margin-right: 8px; text-shadow: 0 0 15px #ffd700;"></ion-icon>
         Task Roulette
       </h2>
       <p>Gira la ruleta y deja que el destino elija</p>
     </div>
 
     <div class="wheel-wrapper">
-      <div class="pointer"></div>
       
-<!-- La Ruleta que gira -->
-      <div class="wheel" 
-           [style.background]="ruletaGradient"
-           [style.transform]="'rotate(-' + angulo + 'deg)'"
-           [style.transition]="animacionActiva ? 'transform 3s cubic-bezier(0.17, 0.67, 0.12, 0.99)' : 'none'">
+      <div class="pointer-container">
+        <div class="pointer-glow"></div>
+        <div class="pointer"></div>
+      </div>
+      
+      <div class="ruleta-outer-ring">
+        
+        <div class="wheel" 
+             [style.background]="ruletaGradient"
+             [style.transform]="'rotate(-' + angulo + 'deg)'"
+             [style.transition]="animacionActiva ? 'transform 3s cubic-bezier(0.17, 0.67, 0.12, 0.99)' : 'none'">
 
-        <div class="wheel-segment" 
-             *ngFor="let tarea of tareas; let i = index"
-             [style.transform]="'rotate(' + ((i * (360 / tareas.length)) + (180 / tareas.length) - 90) + 'deg)'">
-          <span class="segment-text">{{ tarea }}</span>
+          <div class="wheel-segment" 
+               *ngFor="let tarea of tareas; let i = index"
+               [style.transform]="'rotate(' + ((i * (360 / tareas.length)) + (180 / tareas.length) - 90) + 'deg)'">
+            <span class="segment-text">{{ tarea }}</span>
+          </div>
+
         </div>
+
+        <div class="ruleta-center-pivot"></div>
 
       </div>
     </div>
 
     <ion-button 
-      class="neon-btn-gold" 
+      class="neon-btn-gold btn-arcade" 
       expand="block" 
       (click)="girarRuleta()" 
       [disabled]="girando || tareas.length === 0">
